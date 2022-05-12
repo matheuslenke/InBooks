@@ -7,15 +7,15 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class LibraryViewController: UIViewController {
     
-    lazy var favoritesView: FavoritesView = {
-        let favorites = FavoritesView()
-        return favorites
+    lazy var libraryView: LibraryView = {
+        let library = LibraryView()
+        return library
     }()
     
     override func loadView() {
-        self.view = favoritesView
+        self.view = libraryView
     }
 
     override func viewDidLoad() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesView: UIView {
+class LibraryView: UIView {
 
 
     init() {
