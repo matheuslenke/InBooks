@@ -7,40 +7,81 @@
 
 import UIKit
 
-class LibraryViewController: UIViewController {
+protocol LibraryManagerDelegate: AnyObject {
+    func fetchBooksWithSuccess()
+    func errorToFetchBooks(_ error: String)
+}
+
+class LibraryViewController: MultiStateViewController {
     
     var viewModel: LibraryViewModel?
     
+    // MARK: Private Variables
+    
+    private var state: ViewState = .loading {
+        didSet {
+            DispatchQueue.main.async {
+                self.setupView()
+            }
+        }
+    }
+
+    private func setupView() {
+        switch state {
+        case .loading:
+            self.setupLoadingState()
+        case .normal:
+            self.setupNormalState()
+        case .error:
+            self.setupErrorState(message: "Erro ao encontrar livros. Por favor, tente novamente")
+        case .empty:
+            self.setupEmptyState(message: "Sua biblioteca está vazia! Adicione novos livros")
+        }
+    }
+    
+    // MARK: UI Elements
+    
     lazy var libraryView: LibraryView = {
         let library = LibraryView()
+        library.translatesAutoresizingMaskIntoConstraints = false
         return library
     }()
     
-    override func loadView() {
-        self.view = libraryView
-    }
+    // MARK: Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
-        if let viewModel = viewModel {
-            viewModel.fetchBooks()
-            libraryView.reloadCollectionView()
-        }
+        self.fetchBooks()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let viewModel = viewModel {
-            viewModel.fetchBooks()
-            libraryView.reloadCollectionView()
-        }
+        self.fetchBooks()
         
         title = "My Library"
         configLibraryView()
     }
     
+    // MARK: Private functions
+    
     private func configLibraryView() {
         libraryView.setupCollectionViewDelegates(delegate: self, dataSource: self)
+        self.contentView.addSubview(libraryView)
+        
+        NSLayoutConstraint.activate([
+            libraryView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            libraryView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            libraryView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            libraryView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+    }
+    
+    private func fetchBooks() {
+        if let viewModel = viewModel {
+            state = .loading
+            viewModel.fetchBooks()
+            libraryView.reloadCollectionView()
+        }
     }
 }
 
@@ -67,7 +108,7 @@ extension LibraryViewController: UICollectionViewDelegate {
         let confirm = UIAlertAction(title: "Deletar", style: .destructive) { [weak self] _ in
             ManagedObjectContext.shared.delete(title: item.title) { _ in
                 self?.viewModel?.deleteBook(book: item)
-                self?.libraryView.reloadCollectionView()
+                self?.fetchBooks()
             }
         }
         let cancel = UIAlertAction(title: "Cancelar", style: .cancel)
@@ -91,6 +132,24 @@ extension LibraryViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel?.books.count ?? 0
+    }
+}
+
+extension LibraryViewController: LibraryManagerDelegate {
+    func fetchBooksWithSuccess() {
+        if let viewModel = viewModel {
+            if viewModel.books.count == 0 {
+                state = .empty
+            } else {
+                state = .normal
+            }
+        }
+    }
+    
+    func errorToFetchBooks(_ error: String) {
+        state = .error
+        print(error)
+        self.displayAlert(titulo: "Error", mensagem: error)
     }
 }
 

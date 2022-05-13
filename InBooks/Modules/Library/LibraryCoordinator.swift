@@ -25,6 +25,7 @@ class LibraryCoordinator: Coordinator {
         let libraryViewController = LibraryViewController()
         let viewModel = LibraryViewModel()
         libraryViewController.viewModel = viewModel
+        viewModel.delegate = libraryViewController
 
         navigationController.setViewControllers([libraryViewController], animated: true)
     }

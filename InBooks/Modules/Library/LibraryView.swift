@@ -16,6 +16,11 @@ class LibraryView: UIView {
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
+    
+    lazy var emptyView: EmptyView = {
+        let empty = EmptyView()
+        return empty
+    }()
 
     init() {
         super.init(frame: .zero)
@@ -49,5 +54,13 @@ class LibraryView: UIView {
     
     public func reloadCollectionView() {
         collectionView.reloadData()
+    }
+    
+    public func setupEmptyView() {
+        
+    }
+    
+    public func removeEmptyView() {
+        
     }
 }

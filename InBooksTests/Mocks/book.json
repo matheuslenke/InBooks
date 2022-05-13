@@ -1,0 +1,98 @@
+{
+    "books": [
+        {
+            "isbn": "9788573794427",
+            "formato": "BOOK",
+            "titulo": "Titulo",
+            "subtitulo": "Subtitulo",
+            "titulo_original": "",
+            "volume": "",
+            "edicao": "1",
+            "detalhes_da_edicao": "",
+            "ano_edicao": "2001",
+            "colecao": "Série Clinica Brasileira de Cirurgia",
+            "volume_colecao": "",
+            "data_publicacao": "14/09/2001",
+            "idioma": "Português",
+            "origem": "Brasil",
+            "contribuicao": [
+                {
+                    "nome": "Angelita",
+                    "sobrenome": "Harb-Gama",
+                    "tipo_de_contribuicao": "Autor",
+                    "codigo_contribuicao": "1"
+                }
+            ],
+            "catalogacao": {
+                "palavras_chave": "doença de Crohn",
+                "areas": "Técnicos",
+                "cdd": "",
+                "bisac_principal": [
+                    "MED085060"
+                ],
+                "codigo_thema_categoria": [
+                    "MNG"
+                ],
+                "codigo_thema_qualificador": []
+            },
+            "bisac_principal": "MED085060",
+            "sinopse": "Este tema é de grande interesse editorial para todos os profissionais que estão na prática clínica, sobretudo os cirurgiões. Há nele numerosos aspectos que merecem atualização e outros que embora constituam matéria de controvérsias, devem ser discuti dos em publicação visando subsidiar o ensino continuado. Dentre outros objetivos, este volume foi organizado de forma a rever os atuais conhecimentos do diagnóstico diferencial da doença de Crohn, da retocolite ulcerativa e de suas diferentes formas clínicas incluindo-se o acometimento infantil. As demais doenças inflamatórias não foram incluídas devendo no futuro ser parte de outra publicação.",
+            "sumario": "",
+            "classificacao_indicativa": "1",
+            "faixa_etaria": null,
+            "ano_escolar": null,
+            "grau_escolar": null,
+            "link": "",
+            "booktrailer": "",
+            "medidas": {
+                "altura": "23",
+                "largura": "16",
+                "espessura": "2",
+                "peso": "0.34kg",
+                "paginas": "248",
+                "encadernacao": "1"
+            },
+            "dimensoes": "23 x 16 x 2 cm",
+            "moeda": "BRL",
+            "ebook_drm": "N",
+            "ebook_distribuicao": null,
+            "status": 4,
+            "previsao_disponibilidade": "",
+            "codigo_de_barras": "9788573794427",
+            "codigo_interno": "9788573794427",
+            "certificacao_inmetro": "",
+            "codigo_fiscal": "49019900",
+            "preco": "100",
+            "registro_criado_em": "2022-04-19 13:38:34",
+            "registro_atualizado_em": "2022-04-19 13:38:34",
+            "imagens": {
+                "imagem_primeira_capa": {
+                    "pequena": "https://s3-sa-east-1.amazonaws.com/fl.mercadoeditorial.org/uploads/book/first_cover/thumb_9788573794427.jpg",
+                    "media": "https://s3-sa-east-1.amazonaws.com/fl.mercadoeditorial.org/uploads/book/first_cover/350_9788573794427.jpg",
+                    "grande": "https://s3-sa-east-1.amazonaws.com/fl.mercadoeditorial.org/uploads/book/first_cover/9788573794427.jpg"
+                }
+            },
+            "editora": {
+                "codigo_editora": "708",
+                "nome_fantasia": "Editora Atheneu",
+                "cnpj": "33.078.353/0002-44",
+                "cidade": "São Paulo"
+            },
+            "selo": {
+                "codigo_selo": "620",
+                "nome_do_selo_editorial": "Editora Atheneu"
+            }
+        }
+    ],
+    "navigation": {
+        "page": 1,
+        "next_page": 2,
+        "prev_page": 1,
+        "total_pages": 4,
+        "total_records": 390
+    },
+    "status": {
+        "success": true,
+        "code": 200
+    }
+}

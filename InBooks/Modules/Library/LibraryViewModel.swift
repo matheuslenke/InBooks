@@ -9,6 +9,9 @@ import Foundation
 
 class LibraryViewModel {
     
+    
+    weak var delegate: LibraryManagerDelegate?
+    
     var books: [SimpleBook] = []
     
     init() {
@@ -17,6 +20,7 @@ class LibraryViewModel {
     
     func fetchBooks() {
         books = ManagedObjectContext.shared.getBooks()
+        delegate?.fetchBooksWithSuccess()
     }
     
     func deleteBook(book: SimpleBook) {

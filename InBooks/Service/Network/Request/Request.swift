@@ -9,7 +9,7 @@ import Foundation
 
 enum Request: URLRequestProtocol {
     
-    case searchBooksByTitle(title: String, page: Int, order: String)
+    case searchBooksByTitle(title: String, page: Int)
     
     /// The API's base url
     var baseURL: String {
@@ -27,7 +27,7 @@ enum Request: URLRequestProtocol {
     /// The API's query params
     var queryParams: [URLQueryItem] {
         switch self {
-        case .searchBooksByTitle(let title, let page, let order):
+        case .searchBooksByTitle(let title, let page):
             return [URLQueryItem(name: "titulo", value: title), URLQueryItem(name: "page", value: "\(page)")]
         }
     }

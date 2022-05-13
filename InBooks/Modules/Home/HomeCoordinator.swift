@@ -24,7 +24,8 @@ class HomeCoordinator: Coordinator {
     func start() {
         
         let homeViewController = HomeViewController()
-        let booksService = BooksService()
+        let networkClient = NetworkClient()
+        let booksService = BooksService(networkClient: networkClient)
         let viewModel =  HomeViewModel(searchBookService: booksService)
         viewModel.coordinator = self
         homeViewController.viewModel = viewModel
