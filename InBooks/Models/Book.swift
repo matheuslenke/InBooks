@@ -14,6 +14,7 @@ struct Book: Codable {
     let titulo: String
     let subtitulo: String?
     let anoEdicao: String?
+    let sinopse: String?
     let preco: String?
     let imagens: [Imagens]
     let moeda: String?
@@ -22,7 +23,7 @@ struct Book: Codable {
         case isbn, formato, titulo, subtitulo
         case anoEdicao = "ano_edicao"
         case imagens = "imagens"
-        case preco, moeda
+        case preco, moeda, sinopse
     }
     
     public init(from decoder: Decoder) throws  {
@@ -34,6 +35,7 @@ struct Book: Codable {
         anoEdicao = try! container.decodeIfPresent(String.self, forKey: .anoEdicao) ?? nil
         preco = try! container.decodeIfPresent(String.self, forKey: .preco) ?? nil
         moeda = try! container.decodeIfPresent(String.self, forKey: .moeda) ?? nil
+        sinopse = try! container.decodeIfPresent(String.self, forKey: .sinopse) ?? nil
         
         do {
             imagens = try [container.decode(Imagens.self, forKey: .imagens)]

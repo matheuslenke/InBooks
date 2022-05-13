@@ -13,12 +13,10 @@ class BookTableViewCell: UITableViewCell {
     lazy var bookCoverImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        image.clipsToBounds = false
         image.image = UIImage(systemName: "text.book.closed.fill")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-    
     
     lazy var bookTitleLabel: UILabel = {
         let label = UILabel()
@@ -68,7 +66,14 @@ class BookTableViewCell: UITableViewCell {
         if model.imagens.count > 0 {
             if let img = model.imagens[0].imagemPrimeiraCapa?.pequena,
                let imageUrl = URL(string: img) {
-                self.bookCoverImageView.kf.setImage(with: imageUrl)
+                self.bookCoverImageView.kf.setImage(with: imageUrl, placeholder: UIImage(systemName: "text.book.closed.fill")) { result in
+                    switch result {
+                    case .success:
+                        return
+                    case .failure(let error):
+                        self.bookCoverImageView.image = UIImage(systemName: "text.book.closed.fill")
+                    }
+                }
             }
         }
     }

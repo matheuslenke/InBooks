@@ -15,6 +15,8 @@ class HomeViewModel {
     
     // MARK: - Public variables
     weak var delegate: HomeManagerDelegate?
+    var coordinator: HomeCoordinator?
+    
     var searchTitle = ""
     
     var books: [Book] = []
@@ -43,6 +45,11 @@ class HomeViewModel {
                 self.error(error: "Error: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func goToBookDetails(bookIndex: Int) {
+        let book = self.books[bookIndex]
+        coordinator?.bookDetail(book: book)
     }
     
     // MARK: Private functions

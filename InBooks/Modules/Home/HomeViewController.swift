@@ -48,7 +48,7 @@ class HomeViewController: MultiStateViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.searchTitle = "Game"
+        viewModel?.searchTitle = "Harry potter"
         state = .loading
         fetchBooks()
         configHomeView()
@@ -63,6 +63,7 @@ class HomeViewController: MultiStateViewController {
         self.homeView.delegate(delegate: self)
         self.homeView.delegateSearchBar(delegate: self)
         self.contentView.addSubview(homeView)
+        self.title = "Home"
         
         NSLayoutConstraint.activate([
             homeView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -93,7 +94,7 @@ extension HomeViewController: HomeManagerDelegate {
             state = .normal
             DispatchQueue.main.async {
                 self.homeView.reloadTableView()
-            }            
+            }
         }
     }
     
@@ -108,6 +109,10 @@ extension HomeViewController: HomeManagerDelegate {
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.goToBookDetails(bookIndex: indexPath.row)
     }
 }
 

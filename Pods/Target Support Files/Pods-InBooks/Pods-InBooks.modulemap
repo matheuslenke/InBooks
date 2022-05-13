@@ -1,0 +1,6 @@
+framework module Pods_InBooks {
+  umbrella header "Pods-InBooks-umbrella.h"
+
+  export *
+  module * { export * }
+}

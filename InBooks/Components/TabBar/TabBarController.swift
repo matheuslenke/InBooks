@@ -9,13 +9,30 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
+    // MARK: Coordinators
+    
+    private var homeCoordinator: HomeCoordinator?
+//    private var bookDetailsCoordinator: BookDetailsCoordinator?
+    private var libraryCoordinator: LibraryCoordinator?
+    
+    // MARK: View Controllers
+    
+    private var homeViewController: UIViewController? {
+        return self.homeCoordinator?.rootViewController
+    }
+    
+//    private var bookDetailsViewController: UIViewController? {
+//        return self.homeCoordinator?.rootViewController
+//    }
+    
+    private var libraryViewController: UIViewController? {
+        return self.libraryCoordinator?.rootViewController
+    }
+    
     // MARK: UI Elements
     
     lazy var homeViewNavigationController: UINavigationController = {
-        let home = HomeViewController()
-        home.viewModel = HomeViewModel(searchBookService: BooksService())
-        home.title = "Home"
-        let navigation = UINavigationController(rootViewController: home)
+        let navigation = UINavigationController()
         
         let homeTabBar = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 0)
         navigation.tabBarItem = homeTabBar
@@ -42,13 +59,16 @@ class TabBarController: UITabBarController {
     
     override func loadView() {
         super.loadView()
-        self.tabBar.standardAppearance = appearance
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configTabBar()
+        setupCoordinators()
+        setupViewControllers()
     }
+    
+    // MARK: Private Functions
     
     private func configTabBar() {
         self.tabBar.standardAppearance = appearance
@@ -57,6 +77,20 @@ class TabBarController: UITabBarController {
         self.viewControllers = [homeViewNavigationController, libraryNavigationController]
     }
     
-    // MARK: Private Functions
+    private func setupCoordinators() {
+        homeCoordinator = HomeCoordinator(navigationController: homeViewNavigationController)
+        homeCoordinator?.start()
+        
+        libraryCoordinator = LibraryCoordinator(navigationController: libraryNavigationController)
+        libraryCoordinator?.start()
+    }
+    
+    private func setupViewControllers() {
+        if let homeViewController = homeViewController,
+        let libraryViewController = libraryViewController {
+            setViewControllers([homeViewController, libraryViewController], animated: true)
+        }
+    }
+    
 
 }

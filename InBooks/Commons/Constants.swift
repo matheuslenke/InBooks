@@ -8,7 +8,7 @@
 import Foundation
 
 struct Constants {
-    static let baseURL: String = "https://sandbox.mercadoeditorial.org/api/v1.2"
+    static let baseURL: String = "https://api.mercadoeditorial.org/api/v1.2"
     
 }
 
